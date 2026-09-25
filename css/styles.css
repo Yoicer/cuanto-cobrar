@@ -1,0 +1,569 @@
+/* Reset básico y variables */
+:root {
+  --color_bg: #f7f8fa;
+  --color_surface: #ffffff;
+  --color_text: #1c1f26;
+  --color_text_muted: #5b6270;
+  --color_primary: #2f6fed;
+  --color_primary_dark: #1e4fbf;
+  --color_accent: #17a673;
+  --color_border: #e2e5eb;
+  --color_error: #d64545;
+  --radius: 12px;
+  --max_width: 720px;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: var(--color_bg);
+  color: var(--color_text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.skip_link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color_primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+
+.skip_link:focus {
+  left: 0;
+}
+
+.visually_hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Header */
+.site_header {
+  padding: 1.25rem 0;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--color_primary_dark);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+.hero h1 {
+  font-size: 1.75rem;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+}
+
+.hero_subtitle {
+  color: var(--color_text_muted);
+  font-size: 1rem;
+  margin: 0 auto;
+  max-width: 46ch;
+}
+
+/* Calculadora */
+.calculator {
+  background: var(--color_surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color_border);
+  padding: 1.5rem 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.calculator_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form_field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form_field select,
+.form_field input {
+  border: 1px solid var(--color_border);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--color_text);
+}
+
+.form_field select:focus,
+.form_field input:focus {
+  outline: 2px solid var(--color_primary);
+  outline-offset: 1px;
+}
+
+.form_field.has_error select,
+.form_field.has_error input {
+  border-color: var(--color_error);
+}
+
+.field_error {
+  color: var(--color_error);
+  font-size: 0.85rem;
+  min-height: 1.1em;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn_primary {
+  background: var(--color_primary);
+  color: #fff;
+}
+
+.btn_primary:hover {
+  background: var(--color_primary_dark);
+}
+
+.btn_secondary {
+  background: var(--color_bg);
+  color: var(--color_text);
+  border: 1px solid var(--color_border);
+}
+
+.btn_secondary:hover {
+  background: #eef0f4;
+}
+
+.btn_secondary[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Resultado */
+.result {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--color_border);
+}
+
+.result_title {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+.result_range {
+  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+}
+
+.result_range strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--color_accent);
+  margin-top: 0.15rem;
+}
+
+.result_hourly {
+  color: var(--color_text_muted);
+  margin: 0 0 1rem;
+}
+
+.result_breakdown {
+  margin-bottom: 1.25rem;
+}
+
+.result_breakdown summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color_primary_dark);
+}
+
+.result_breakdown ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--color_text_muted);
+}
+
+.result_actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.copy_feedback {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color_accent);
+  min-height: 1.2em;
+}
+
+/* Cómo se calcula */
+.how_it_works {
+  margin-bottom: 2.5rem;
+}
+
+.how_it_works h2 {
+  font-size: 1.25rem;
+}
+
+.how_it_works ol {
+  padding-left: 1.25rem;
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: var(--color_text_muted);
+}
+
+/* FAQ */
+.faq {
+  margin-bottom: 3rem;
+}
+
+.faq h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.faq_item {
+  margin-bottom: 1.25rem;
+}
+
+.faq_item h3 {
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+}
+
+.faq_item p {
+  margin: 0;
+  color: var(--color_text_muted);
+}
+
+/* Footer */
+.site_footer {
+  text-align: center;
+  color: var(--color_text_muted);
+  font-size: 0.85rem;
+  padding-bottom: 2rem;
+}
+
+/* Desktop */
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .calculator_form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+
+  .calculator_form .btn_primary {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Modal: Generar cotización */
+body.modal_open {
+  overflow: hidden;
+}
+
+.quote_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+}
+
+.quote_modal[hidden] {
+  display: none;
+}
+
+.quote_modal_overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 31, 38, 0.55);
+}
+
+.quote_modal_dialog {
+  position: relative;
+  background: var(--color_surface);
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1.5rem 1.25rem 2rem;
+}
+
+.quote_modal_close {
+  position: sticky;
+  top: 0;
+  left: 100%;
+  margin-left: auto;
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--color_text_muted);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.quote_panel h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+
+.quote_field_full {
+  grid-column: 1 / -1;
+}
+
+.optional_tag {
+  font-weight: 400;
+  color: var(--color_text_muted);
+  font-size: 0.8rem;
+}
+
+/* Vista de la cotización */
+.quote_document {
+  background: var(--color_surface);
+  border: 1px solid var(--color_border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.quote_document_header {
+  border-bottom: 2px solid var(--color_primary);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.quote_document_header h2 {
+  margin: 0 0 0.35rem;
+  color: var(--color_primary_dark);
+}
+
+.quote_number,
+.quote_date {
+  margin: 0.15rem 0;
+  color: var(--color_text_muted);
+  font-size: 0.9rem;
+}
+
+.quote_parties {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quote_parties h3 {
+  margin: 0 0 0.25rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--color_text_muted);
+}
+
+.quote_parties p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.quote_details h3 {
+  margin: 0 0 0.35rem;
+}
+
+.quote_details > p {
+  color: var(--color_text_muted);
+  margin: 0 0 1rem;
+}
+
+.quote_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.quote_table th,
+.quote_table td {
+  border: 1px solid var(--color_border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.quote_totals {
+  margin-left: auto;
+  max-width: 260px;
+  text-align: right;
+}
+
+.quote_totals p {
+  margin: 0.35rem 0;
+}
+
+.quote_total_final {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color_accent);
+  border-top: 1px dashed var(--color_border);
+  padding-top: 0.5rem;
+}
+
+.quote_validity {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--color_text_muted);
+}
+
+.quote_notes_section {
+  margin-top: 1rem;
+  border-top: 1px dashed var(--color_border);
+  padding-top: 0.75rem;
+}
+
+.quote_notes_section h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--color_text_muted);
+}
+
+.quote_notes_section p {
+  margin: 0;
+}
+
+.quote_actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .quote_modal {
+    padding: 2rem 1.25rem;
+    align-items: center;
+  }
+
+  .quote_modal_dialog {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    max-height: calc(100vh - 4rem);
+    border-radius: var(--radius);
+  }
+
+  .quote_form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+
+  .quote_parties {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .quote_parties > div {
+    flex: 1;
+  }
+}
+
+/* Impresión: solo se imprime la cotización, sin botones ni navegación */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .quote_modal,
+  .quote_modal_dialog,
+  .quote_preview_panel,
+  #quote_document,
+  #quote_document * {
+    visibility: visible;
+  }
+
+  .quote_modal {
+    position: static;
+    display: block;
+  }
+
+  .quote_modal_overlay {
+    display: none;
+  }
+
+  .quote_modal_dialog {
+    position: static;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+  }
+
+  #quote_document {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: none;
+    padding: 0;
+  }
+
+  .quote_modal_close,
+  .quote_actions,
+  #quote_copy_feedback {
+    display: none !important;
+  }
+}

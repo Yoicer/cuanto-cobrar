@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cuánto cobrar? | Calculadora de tarifas para freelancers en Latinoamérica</title>
+  <meta name="description" content="Calcula cuánto cobrar por tu próximo proyecto freelance según tu país, profesión y experiencia. Precio mínimo, precio ideal y valor por hora en segundos." />
+  <meta name="keywords" content="cuanto cobrar freelance, calculadora tarifas freelancer, precio hora freelance, cuanto cobrar diseño gráfico, cuanto cobrar desarrollo web" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cuantocobrar.example.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="¿Cuánto cobrar? Calculadora para freelancers en Latinoamérica" />
+  <meta property="og:description" content="Calcula el precio mínimo, ideal y el valor por hora de tu próximo proyecto freelance." />
+  <meta property="og:locale" content="es_LA" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip_link" href="#calculator">Ir directo a la calculadora</a>
+
+  <header class="site_header">
+    <div class="container">
+      <p class="brand">¿Cuánto cobrar?</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero -->
+    <section class="hero container">
+      <h1>¿No sabes cuánto cobrar por tu trabajo?</h1>
+      <p class="hero_subtitle">
+        Calcula en segundos el precio mínimo, el precio ideal y el valor por hora
+        de tu próximo proyecto freelance, según tu país, tu profesión y tu experiencia.
+      </p>
+    </section>
+
+    <!-- 3. Calculadora -->
+    <section id="calculator" class="calculator container" aria-labelledby="calculator_title">
+      <h2 id="calculator_title" class="visually_hidden">Calculadora de tarifas freelance</h2>
+
+      <form id="calculator_form" class="calculator_form" novalidate>
+        <div class="form_field">
+          <label for="country">País</label>
+          <select id="country" name="country" required aria-describedby="country_error">
+            <option value="" disabled selected>Selecciona tu país</option>
+          </select>
+          <span class="field_error" id="country_error" role="alert"></span>
+        </div>
+
+        <div class="form_field">
+          <label for="profession">Profesión / servicio</label>
+          <select id="profession" name="profession" required aria-describedby="profession_error">
+            <option value="" disabled selected>Selecciona tu servicio</option>
+          </select>
+          <span class="field_error" id="profession_error" role="alert"></span>
+        </div>
+
+        <div class="form_field">
+          <label for="experience_level">Nivel de experiencia</label>
+          <select id="experience_level" name="experience_level" required aria-describedby="experience_level_error">
+            <option value="" disabled selected>Selecciona tu nivel</option>
+          </select>
+          <span class="field_error" id="experience_level_error" role="alert"></span>
+        </div>
+
+        <div class="form_field">
+          <label for="estimated_hours">Horas estimadas del proyecto</label>
+          <input
+            type="number"
+            id="estimated_hours"
+            name="estimated_hours"
+            min="1"
+            step="1"
+            placeholder="Ej: 20"
+            required
+            aria-describedby="estimated_hours_error"
+          />
+          <span class="field_error" id="estimated_hours_error" role="alert"></span>
+        </div>
+
+        <div class="form_field">
+          <label for="profit_margin">Margen de ganancia deseado (%)</label>
+          <input
+            type="number"
+            id="profit_margin"
+            name="profit_margin"
+            min="0"
+            max="200"
+            step="1"
+            value="30"
+            required
+            aria-describedby="profit_margin_error"
+          />
+          <span class="field_error" id="profit_margin_error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn btn_primary">Calcular precio</button>
+      </form>
+
+      <!-- 4. Resultado -->
+      <div id="result" class="result" hidden aria-live="polite">
+        <h2 class="result_title">Resultado</h2>
+
+        <p class="result_range">
+          Precio recomendado:
+          <strong id="result_price_range">—</strong>
+        </p>
+
+        <p class="result_hourly">
+          Valor hora estimado: <strong id="result_hourly_value">—</strong>
+        </p>
+
+        <details class="result_breakdown">
+          <summary>Ver desglose del cálculo</summary>
+          <ul id="result_breakdown_list"></ul>
+        </details>
+
+        <div class="result_actions">
+          <button type="button" id="copy_result_btn" class="btn btn_secondary">
+            Copiar resultado
+          </button>
+          <button type="button" id="recalculate_btn" class="btn btn_secondary">
+            Calcular nuevamente
+          </button>
+          <button type="button" id="generate_quote_btn" class="btn btn_secondary">
+            Generar cotización
+          </button>
+        </div>
+        <p id="copy_feedback" class="copy_feedback" role="status"></p>
+      </div>
+    </section>
+
+    <!-- 5. Cómo se calcula -->
+    <section class="how_it_works container" aria-labelledby="how_it_works_title">
+      <h2 id="how_it_works_title">¿Cómo se calcula?</h2>
+      <p>
+        Partimos de un valor hora de referencia según tu país, tu profesión y tu nivel
+        de experiencia. Ese valor se multiplica por las horas estimadas del proyecto
+        para obtener el <strong>precio mínimo</strong>. Luego se le suma el margen de
+        ganancia que elijas para obtener el <strong>precio ideal</strong>.
+      </p>
+      <ol>
+        <li>Costo base = valor hora × horas estimadas</li>
+        <li>Margen = costo base × porcentaje de ganancia</li>
+        <li>Precio ideal = costo base + margen</li>
+      </ol>
+      <p class="disclaimer">
+        Los valores por hora son de referencia y pueden variar según tu experiencia,
+        la complejidad del proyecto y el mercado de tus clientes.
+      </p>
+    </section>
+
+    <!-- 6. FAQ -->
+    <section class="faq container" aria-labelledby="faq_title">
+      <h2 id="faq_title">Preguntas frecuentes</h2>
+
+      <div class="faq_item">
+        <h3>¿Cómo sé cuánto cobrar como freelancer?</h3>
+        <p>
+          Lo ideal es definir un valor por hora que cubra tus costos, tus impuestos y
+          una ganancia razonable, y luego multiplicarlo por las horas que te tomará el
+          proyecto. Esta calculadora te da un punto de partida según tu país y tu
+          experiencia.
+        </p>
+      </div>
+
+      <div class="faq_item">
+        <h3>¿Qué diferencia hay entre el precio mínimo y el precio ideal?</h3>
+        <p>
+          El precio mínimo cubre solo tu costo por hora sin ganancia adicional. El
+          precio ideal incluye el margen de ganancia que definas, para que el proyecto
+          también te deje una utilidad real.
+        </p>
+      </div>
+
+      <div class="faq_item">
+        <h3>¿Los valores por hora son exactos?</h3>
+        <p>
+          No, son valores de referencia para un MVP. Sirven como guía inicial y pueden
+          ajustarse según tu experiencia real, tu especialización y el tipo de cliente.
+        </p>
+      </div>
+
+      <div class="faq_item">
+        <h3>¿Puedo usar esta herramienta para cualquier país de Latinoamérica?</h3>
+        <p>
+          Por ahora incluye Colombia, México, Argentina, Chile, Perú y Ecuador.
+          Iremos agregando más países y datos más precisos en próximas versiones.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site_footer container">
+    <p>¿Cuánto cobrar? — Herramienta gratuita para freelancers de Latinoamérica.</p>
+  </footer>
+
+  <!-- Modal: Generar cotización -->
+  <div id="quote_modal" class="quote_modal" hidden>
+    <div id="quote_modal_overlay" class="quote_modal_overlay"></div>
+    <div class="quote_modal_dialog" role="dialog" aria-modal="true" aria-labelledby="quote_modal_title">
+      <button type="button" id="quote_modal_close" class="quote_modal_close" aria-label="Cerrar cotización">
+        ×
+      </button>
+
+      <!-- Paso 1: datos de la cotización -->
+      <div id="quote_form_panel" class="quote_panel">
+        <h2 id="quote_modal_title">Generar cotización</h2>
+        <form id="quote_form" class="quote_form calculator_form" novalidate>
+          <div class="form_field">
+            <label for="quote_freelancer_name">Nombre del freelancer o empresa</label>
+            <input type="text" id="quote_freelancer_name" name="quote_freelancer_name" placeholder="Ej: Ana Pérez" required />
+          </div>
+
+          <div class="form_field">
+            <label for="quote_client_name">Nombre del cliente</label>
+            <input type="text" id="quote_client_name" name="quote_client_name" placeholder="Ej: Empresa S.A.S" required />
+          </div>
+
+          <div class="form_field quote_field_full">
+            <label for="quote_service">Servicio</label>
+            <input type="text" id="quote_service" name="quote_service" required />
+          </div>
+
+          <div class="form_field quote_field_full">
+            <label for="quote_description">Descripción del trabajo</label>
+            <textarea id="quote_description" name="quote_description" rows="3" placeholder="Detalla el alcance del proyecto"></textarea>
+          </div>
+
+          <div class="form_field">
+            <label for="quote_hours">Horas estimadas</label>
+            <input type="number" id="quote_hours" name="quote_hours" min="1" step="1" required />
+          </div>
+
+          <div class="form_field">
+            <label for="quote_hourly_rate">Precio por hora</label>
+            <input type="number" id="quote_hourly_rate" name="quote_hourly_rate" min="0" step="0.01" required />
+          </div>
+
+          <div class="form_field">
+            <label for="quote_discount">Descuento (%) <span class="optional_tag">opcional</span></label>
+            <input type="number" id="quote_discount" name="quote_discount" min="0" max="100" step="1" value="0" />
+          </div>
+
+          <div class="form_field">
+            <label for="quote_tax">Impuesto (%) <span class="optional_tag">opcional</span></label>
+            <input type="number" id="quote_tax" name="quote_tax" min="0" max="100" step="1" value="0" />
+          </div>
+
+          <div class="form_field quote_field_full">
+            <label for="quote_validity_date">Cotización válida hasta</label>
+            <input type="date" id="quote_validity_date" name="quote_validity_date" required />
+          </div>
+
+          <div class="form_field quote_field_full">
+            <label for="quote_notes">Notas adicionales <span class="optional_tag">opcional</span></label>
+            <textarea id="quote_notes" name="quote_notes" rows="2" placeholder="Forma de pago, condiciones, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn_primary quote_field_full">Generar cotización</button>
+        </form>
+      </div>
+
+      <!-- Paso 2: vista previa profesional de la cotización -->
+      <div id="quote_preview_panel" class="quote_panel quote_preview_panel" hidden>
+        <div id="quote_document" class="quote_document">
+          <header class="quote_document_header">
+            <h2>Cotización</h2>
+            <p class="quote_number">N.º <span id="quote_number"></span></p>
+            <p class="quote_date">Fecha: <span id="quote_date"></span></p>
+          </header>
+
+          <section class="quote_parties">
+            <div>
+              <h3>De</h3>
+              <p id="quote_preview_freelancer"></p>
+            </div>
+            <div>
+              <h3>Para</h3>
+              <p id="quote_preview_client"></p>
+            </div>
+          </section>
+
+          <section class="quote_details">
+            <h3 id="quote_preview_service"></h3>
+            <p id="quote_preview_description"></p>
+
+            <table class="quote_table">
+              <thead>
+                <tr>
+                  <th>Concepto</th>
+                  <th>Horas</th>
+                  <th>Precio / hora</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="quote_preview_service_row"></td>
+                  <td id="quote_preview_hours"></td>
+                  <td id="quote_preview_hourly_rate"></td>
+                  <td id="quote_preview_subtotal"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="quote_totals">
+              <p>Subtotal: <span id="quote_total_subtotal"></span></p>
+              <p id="quote_discount_row" hidden>Descuento: <span id="quote_total_discount"></span></p>
+              <p id="quote_tax_row" hidden>Impuesto: <span id="quote_total_tax"></span></p>
+              <p class="quote_total_final">Total: <span id="quote_total_final"></span></p>
+            </div>
+          </section>
+
+          <p class="quote_validity">Cotización válida hasta: <span id="quote_preview_validity"></span></p>
+
+          <section id="quote_notes_section" class="quote_notes_section" hidden>
+            <h3>Notas</h3>
+            <p id="quote_preview_notes"></p>
+          </section>
+        </div>
+
+        <div class="quote_actions">
+          <button type="button" id="quote_print_btn" class="btn btn_primary">
+            Imprimir / Guardar como PDF
+          </button>
+          <button type="button" id="quote_copy_btn" class="btn btn_secondary">Copiar cotización</button>
+          <button type="button" id="quote_edit_btn" class="btn btn_secondary">Editar</button>
+          <button type="button" id="quote_new_btn" class="btn btn_secondary">Nueva cotización</button>
+        </div>
+        <p id="quote_copy_feedback" class="copy_feedback" role="status"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/formula.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/quote.js"></script>
+</body>
+</html>
